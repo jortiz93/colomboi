@@ -7,7 +7,10 @@ app = Flask(__name__)
 # Define routes(Route in Flask maps URL to a specific fucntion)
 @app.route('/')
 def home():
-    return render_template('home.html')
+    # Example data
+    labels = ['January', 'February', 'March', 'April', 'May']
+    data = [10, 20, 15, 25, 30]
+    return render_template('home.html', labels=labels, data=data)
 
 @app.route('/add-transaction')
 def add_transaction():

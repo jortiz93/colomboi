@@ -2,5 +2,16 @@
 
 {% block content %}
 <h1>Welcome to the Budget App!</h1>
-<p>This is your homepage.</p>
+<!-- Pass data to script.js -->
+
+<body>
+    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+    <script id="chart-labels" type="application/json">
+    {{ labels | tojson }}
+</script>
+    <script id="chart-data" type="application/json">
+    {{ data | tojson }}
+</script>
+</body>
 {% endblock %}
