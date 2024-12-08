@@ -6,9 +6,16 @@ app = Flask(__name__)
 
 # Define routes(Route in Flask maps URL to a specific fucntion)
 @app.route('/')
-def hone():
-    return "Welcome to the Budget App!"
+def home():
+    return render_template('home.html')
 
+@app.route('/add-transaction')
+def add_transaction():
+    return render_template('add_transaction.html')
+
+@app.route('/summary')
+def summary():
+    return render_template('summary.html')
 
 # TODO add more routes if needed
 
