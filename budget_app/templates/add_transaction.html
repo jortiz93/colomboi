@@ -1,1 +1,61 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Pass data to script.js -->
+    <div class="row">
+        <div class="col-md-6 col-lg-4 mt-3">
+            <h3 class="text-center">Enter Transactions</h3>
+            <form action="/add-transaction" method="post">
+                <label class="form-label" style="color: #00001B;">Income</label>
+                <div class="input-group mb-3">
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Health Insurance">Health Insurance</option>
+                        <option value="Car Insurance">Car Insurance</option>
+                        <option value="Car Payment">Car Payment</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Internet">Internet</option>
+                        <option value="Miscellaneous">Miscellaneous</option>
+                    </select>
+                </div>
+                <label class="form-label" style="color: #00001B;">Amount</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input type="number" name="spending" class="form-control form-control-sm w-50" placeholder="1000.00"
+                        aria-label="income" step="0.01" min="0">
+                </div>
+                <button type="add" class="btn btn-secondary"
+                    style="background-color: #00001B; color: white;">Add</button>
+            </form>
+        </div>
+        <!-- Table -->
+        <div class="col-md-6 col-lg-6 d-flex justify-content-center align-items-center mt-4">
+            <table class="table">
+                <thead class="bg-dark-blue">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ transaction.category }}</td>
+                        <td>${{ "%.2f"|format(transaction.amount) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <td></td>
+                    <td><strong>Net</strong></td>
+                    <td><strong>${{ "%.2f"|format(net_amount) }}</strong></td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
