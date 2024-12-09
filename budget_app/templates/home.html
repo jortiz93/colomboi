@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to the Budget App!</h1>
-<!-- Pass data to script.js -->
 
-<body>
-    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+<div class="container">
+    <h1>Welcome to the Budget App!</h1>
+    <!-- Pass data to script.js -->
 
-    <script id="chart-labels" type="application/json">
-    {{ labels | tojson }}
-</script>
-    <script id="chart-data" type="application/json">
-    {{ data | tojson }}
-</script>
-</body>
+    <label class="form-label" style="color: #00001B;">Monthly Income</label>
+    <form action="/submit" method="post">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">$</span>
+            <input type="number" name="income" class="form-control form-control-sm w-50" placeholder="1000.00"
+                aria-label="income" step="0.01" min="0">
+        </div>
+        <button type="submit" class="btn btn-secondary" style="background-color: #00001B; color: white;">Submit</button>
+    </form>
+    <div class="d-flex justify-content-end">
+        <canvas class="float-right" id="myChart" style="width:500px; height:500px;"></canvas>
+    </div>
+
+    <script id="chart-labels" type="application/json">{{ labels | tojson }}</script>
+    <script id="chart-data" type="application/json">{{ data | tojson }}</script>
+</div>
 {% endblock %}
