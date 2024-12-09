@@ -1,6 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to the Budget App!</h1>
-<p>This is your homepage.</p>
+
+<div class="container-fluid">
+    <!-- Pass data to script.js -->
+    <div class="row">
+        <div class="col-md-6 col-lg-4 mt-3">
+            <h3 class="text-center">Enter Your Monthly Income</h3>
+            <form action="/submit" method="post">
+                <!-- Income Input -->
+                <label class="form-label" style="color: #00001B;">Income</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input type="number" name="income" class="form-control form-control-sm w-50" placeholder="1000.00"
+                        aria-label="income" step="0.01" min="0">
+                </div>
+                <button type="submit" class="btn btn-secondary"
+                    style="background-color: #00001B; color: white;">Submit</button>
+            </form>
+            <!-- If input erro display alert -->
+            {% if error_message %}
+            <div class="alert alert-danger">
+                {{ error_message }}
+            </div>
+            {% endif %}
+            <!-- If no error display values -->
+            {% if data %}
+            <div class="alert alert-success mt-3">
+                <p>Income: ${{ data }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <!-- Pie chart -->
+        <div class="col-md-6 col-lg-6 d-flex justify-content-center align-items-center mt-4">
+            <canvas class="" id="myChart" style="width:430px; height:430px;"></canvas>
+        </div>
+    </div>
+
+
+    <script id="chart-labels" type="application/json">{{ labels | tojson }}</script>
+    <script id="chart-data" type="application/json">{{ data | tojson }}</script>
+</div>
 {% endblock %}
