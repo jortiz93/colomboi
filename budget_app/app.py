@@ -7,6 +7,7 @@ app = Flask(__name__)
 # Global variables for persistent data (for development use only)
 labels = []
 data = []
+income = 0
 
 @app.route('/')
 def home():
@@ -15,6 +16,7 @@ def home():
 # Define routes(Route in Flask maps URL to a specific fucntion)
 @app.route('/submit', methods=['POST'])
 def input():
+    global income
     error_message = None
 
     if request.method == 'POST':
@@ -39,9 +41,35 @@ def input():
 
     return render_template('home.html', labels=labels, data=data, error_message=error_message)
 
-@app.route('/add-transaction')
+# Global variable to store transactions
+transactions = []
+
+@app.route('/add-transaction', methods=['GET', 'POST'])
 def add_transaction():
-    return render_template('add_transaction.html')
+    global income
+    if request.method == 'POST':
+        category = request.form.get('category')
+        amount = request.form.get('spending')
+
+        # Validate amount
+        if amount and amount.strip():
+            try:
+                amount = float(amount)
+            except ValueError:
+                amount = 0  # Default to 0 if invalid
+        else:
+            amount = 0  # Default to 0 if missing or empty
+
+        # Add transaction if valid
+        if category and amount > 0:
+            transactions.append({'category': category, 'amount': amount})
+
+    # Calculate net amount as income minus the total transactions
+    total_spent = sum(item['amount'] for item in transactions)
+    net_amount = income - total_spent
+
+    # Pass transactions and net amount to the template
+    return render_template('add_transaction.html', transactions=transactions, net_amount=net_amount)
 
 @app.route('/summary')
 def summary():
