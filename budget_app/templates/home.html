@@ -8,25 +8,6 @@
         <div class="col-md-6 col-lg-4 mt-3">
             <h3 class="text-center">Enter Your Monthly Income</h3>
             <form action="/submit" method="post">
-                <!-- Month Input -->
-                <label class="form-label" style="color: #00001B;">Month</label>
-                <div class="input-group mb-3">
-                    <select id="month" name="month" class="form-select" required>
-                        <option value="" disabled selected>Select a month</option>
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="May">May</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
-                    </select>
-                </div>
                 <!-- Income Input -->
                 <label class="form-label" style="color: #00001B;">Income</label>
                 <div class="input-group mb-3">
@@ -44,9 +25,8 @@
             </div>
             {% endif %}
             <!-- If no error display values -->
-            {% if labels and data %}
+            {% if data %}
             <div class="alert alert-success mt-3">
-                <p>Month: {{ labels }}</p>
                 <p>Income: ${{ data }}</p>
             </div>
             {% endif %}

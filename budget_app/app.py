@@ -18,7 +18,6 @@ def input():
     error_message = None
 
     if request.method == 'POST':
-        month = request.form.get('month')
         income = request.form.get('income')
 
         # Validate income
@@ -35,8 +34,8 @@ def input():
 
         if not error_message:
             # Add data to labels and data for dynamic updates
-            labels.append(month)
             data.append(income)
+            labels.append("Income")
 
     return render_template('home.html', labels=labels, data=data, error_message=error_message)
 
