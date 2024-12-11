@@ -5,6 +5,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 # Global variables for persistent data (for development use only)
+month = []
 labels = []
 data = []
 income = 0
@@ -43,6 +44,8 @@ def input():
 
 # Global variable to store transactions
 transactions = []
+total_spent = 0
+net_amount = 0
 
 @app.route('/add-transaction', methods=['GET', 'POST'])
 def add_transaction():
@@ -73,7 +76,7 @@ def add_transaction():
 
 @app.route('/summary')
 def summary():
-    return render_template('summary.html')
+    return render_template('summary.html',income=income, total_spent=total_spent, net_amount=net_amount)
 
 # TODO add more routes if needed
 

@@ -1,1 +1,28 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="col-md-6 col-lg-6 d-flex justify-content-center align-items-center mt-4">
+        <table class="table">
+            <thead class="bg-dark-blue">
+                <tr>
+                    <th scope="col">Month</th>
+                    <th scope="col">Income</th>
+                    <th scope="col">Spending</th>
+                    <th scope="col">Net</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>Month</td>
+                    <td>${{ "%.2f"|format(transaction.amount) }}</td>
+                    <td>${{ "%.2f"|format(transaction.amount) }}</td>
+                    <td>{{ transaction.category }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

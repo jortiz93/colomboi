@@ -1,13 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="container-fluid">
     <!-- Pass data to script.js -->
     <div class="row">
         <div class="col-md-6 col-lg-4 mt-3">
-            <h3 class="text-center">Enter Your Monthly Income</h3>
+            <h4 class="text-center">Enter Your Monthly Income</h4>
             <form action="/submit" method="post">
+                <!-- Month Input -->
+                <label class="form-label" style="color: #00001B;">Month</label>
+                <div class="input-group mb-3">
+                    <select id="month" name="month" required>
+                        <option value="" disabled selected>Select month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                </div>
                 <!-- Income Input -->
                 <label class="form-label" style="color: #00001B;">Income</label>
                 <div class="input-group mb-3">
@@ -15,19 +33,37 @@
                     <input type="number" name="income" class="form-control form-control-sm w-50" placeholder="1000.00"
                         aria-label="income" step="0.01" min="0">
                 </div>
-                <button type="submit" class="btn btn-secondary"
+                <button type="submit" class="btn btn-secondary btn-sm"
                     style="background-color: #00001B; color: white;">Submit</button>
+            </form>
+            <h4 class="text-center">Planned Spending</h4>
+            <form action="/submit" method="post">
+                <label class="form-label" style="color: #00001B;">Category</label>
+                <div class="input-group mb-3">
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Health Insurance">Health Insurance</option>
+                        <option value="Car Insurance">Car Insurance</option>
+                        <option value="Car Payment">Car Payment</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Internet">Internet</option>
+                        <option value="Miscellaneous">Miscellaneous</option>
+                    </select>
+                </div>
+                <label class="form-label" style="color: #00001B;">Amount</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input type="number" name="spending" class="form-control form-control-sm w-50" placeholder="1000.00"
+                        aria-label="income" step="0.01" min="0">
+                </div>
+                <button type="add" class="btn btn-secondary btn-sm"
+                    style="background-color: #00001B; color: white;">Add</button>
             </form>
             <!-- If input erro display alert -->
             {% if error_message %}
             <div class="alert alert-danger">
                 {{ error_message }}
-            </div>
-            {% endif %}
-            <!-- If no error display values -->
-            {% if data %}
-            <div class="alert alert-success mt-3">
-                <p>Income: ${{ data }}</p>
             </div>
             {% endif %}
         </div>
